@@ -5,114 +5,203 @@
  * @format
  */
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { NavigationContainer, StackActions, useNavigation } from '@react-navigation/native';
+import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
+import React, { useState } from 'react';
+import {ActivityIndicator, Alert, Button, Modal, SafeAreaView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import HomeScreen from './Home';
+import LoginScreen from './Login';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+type RootStackParamList = {
+  Login: undefined;
+  Home: undefined;
+};
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+const Stack = createStackNavigator<RootStackParamList>();
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+const App = () => {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+// const LoginScreen= () => {
+//   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+//   const [username, setUsername] = useState('');
+//   const[password, setPassword] = useState('');
+//   const[modalVisible, setModalVisible] = useState(false);
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+//   const handleLogin = () =>{ //buat handle login page, validasi buat field di login
+//     if (username === '' || password === ''){ //kalo salah satu field ada yg kosong atau empty, modal bakal popup
+//       setModalVisible(true);
+//     } else{ //kalo kondisi diatas ga terpenuhi, bakal lgsg di direct ke home
+//       navigation.navigate('Home')
+//     }
+//   }
+//   return (
+//     <SafeAreaProvider>
+//       <SafeAreaView>
+//         <View style={styles.container}>
+//           <Text style={styles.text}> Hello </Text>
+//           <Text style={styles.innerText}> Welcome Back~! </Text>
+//         </View>
 
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
+//         <View style={styles.fieldContainer}>
+//           <TextInput style={styles.field} placeholder="Enter your username" 
+//           value={username}
+//           onChangeText={setUsername}
+//           />
+//           <TextInput style={styles.field} placeholder="Enter your Password" 
+//           value={password}
+//           onChangeText={setPassword}
+//           />
+//         </View>
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+//         <View style={styles.buttonContainer}>
+//           <View style={styles.button}>
+//             <TouchableOpacity onPress={handleLogin}>
+//               <Text style={styles.buttonText}>Login</Text>
+//             </TouchableOpacity>
+//           </View>
+//         </View>
 
+//         <Modal animationType='slide' transparent={true} visible={modalVisible} onRequestClose= {() => {
+//           setModalVisible(false);
+//           }}>
+//           <View style = {styles.modalView}>
+//             <Text style = {styles.modalText}> All field must be filled!</Text>
+//             <TouchableOpacity style = {styles.button} onPress={() => {
+//               setModalVisible(false)
+//             }}>
+//               <Text style = {styles.buttonText}>
+//                 Close
+//               </Text>
+//             </TouchableOpacity>
+//           </View>
+          
+//         </Modal>
+
+//         {/* <ActivityIndicator style={styles.load} size="large" color="#5c69ab" /> */}
+//       </SafeAreaView>
+//     </SafeAreaProvider>
+//   );
+// };
+
+// const HomeScreen = () =>{
+//   return(
+//     <SafeAreaView>
+//       <View style = {styles.homeHeaderContainer}>
+//         <Text style = {styles.homeHeader}>Welcome Back!</Text>
+//       </View>
+      
+//     </SafeAreaView>
+//   );
+// };
+
+//  const styles = StyleSheet.create({
+//     container: {
+//       display: 'flex',
+//       justifyContent: 'center',
+//       alignItems: 'center',
+//       marginTop: 50,
+//       marginStart: 20
+//     },
+
+//     text: {
+//       fontFamily: 'Poppins-Bold',
+//       fontSize : 20,
+//       fontWeight: 'bold',
+//       textAlign: 'center',
+//       justifyContent: 'center'
+//     },
+
+//     innerText:{
+//       color: '#363e6b',
+//       fontFamily: 'Poppins-Regular',
+//     },
+
+//     fieldContainer:{
+//       display: 'flex',
+//       justifyContent: 'center',
+//       alignItems: 'center',
+//       marginTop: 30,
+//       marginBottom: 30
+//     },
+
+//     field:{
+//       width: 200,
+//       height: 50,
+//       borderColor: '#5c69ab',
+//       borderWidth: 1,
+//       padding: 10,
+//       borderRadius: 10,
+//       fontFamily: 'Poppins-Regular',
+//     },
+//     button: {
+//       backgroundColor: 'darkblue',
+//       height: 40,
+//       width: 100,
+//       borderRadius: 30
+//     },
+//     buttonContainer: {
+//       justifyContent: 'center',
+//       display: 'flex',
+//       alignItems: 'center',
+//       marginTop: 30
+//     },
+//     buttonText: {
+//       color: 'white',
+//       textAlign: 'center',
+//       padding: 10,
+//       fontFamily: 'Poppins-Regular',
+//     },
+//     load: {
+//       marginTop: 30
+//     },
+//     homeHeaderContainer: {
+//       display: 'flex',
+//       justifyContent: 'center',
+//       alignItems: 'center',
+//       padding: 20
+//     },
+//     homeHeader:{
+//       fontSize: 20,
+//       fontWeight: 'bold',
+//       color: '#363e6b',
+//       fontFamily: 'Poppins-Regular'
+//     },
+//     modalView: {
+//       margin: 20,
+//       backgroundColor: 'white',
+//       borderRadius: 20,
+//       padding: 35,
+//       alignItems: 'center',
+//       shadowColor: '#000',
+//       shadowOffset: {
+//         width: 0,
+//         height: 2
+//       },
+//       shadowOpacity: 0.25,
+//       shadowRadius: 4,
+//       elevation: 5
+//     },
+//     modalText:{
+//       color: '#363e6b',
+//       textAlign: 'center',
+//       alignItems: 'center',
+//       marginBottom: 15,
+//       fontFamily: 'Poppins-Regular'
+//     }
+
+
+//     }
+
+//   );
+  
 export default App;
