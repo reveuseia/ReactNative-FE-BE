@@ -29,7 +29,7 @@ const LoginScreen = () => {
       <SafeAreaView style={styles.safe}>
         <View style={styles.container}>
           <Text style={styles.text}> Hello </Text>
-          <Text style={styles.innerText}> Welcome Back~! </Text>
+          <Text style={styles.innerText}> Welcome Back {username}~ ! </Text>
         </View>
 
         <View style={styles.fieldContainer}>
