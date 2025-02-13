@@ -100,24 +100,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     justifyContent: 'center',
-    color: 'green'
+    color: '#48d9ca'
   },
   innerText: {
-    color: '#363e6b',
+    // color: '#363e6b',
     fontFamily: 'Poppins-Regular',
-    color: 'white'
+     color: 'white'
   },
   fieldContainer: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 30,
-    
+    marginTop: 100,
     marginBottom: 30,
   },
   field: {
     backgroundColor: 'white',
-    width: 200,
+    width: 250,
     height: 50,
     borderColor: '#5c69ab',
     borderWidth: 1,
