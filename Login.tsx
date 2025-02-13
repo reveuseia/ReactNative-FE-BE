@@ -15,6 +15,7 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
 
+
   const handleLogin = () => {
     if (username === '' || password === '') {
       setModalVisible(true);
@@ -25,7 +26,7 @@ const LoginScreen = () => {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView>
+      <SafeAreaView style={styles.safe}>
         <View style={styles.container}>
           <Text style={styles.text}> Hello </Text>
           <Text style={styles.innerText}> Welcome Back~! </Text>
@@ -81,12 +82,17 @@ const LoginScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  safe:{
+    flex: 1,
+    backgroundColor: '#262838',
+  },
   container: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 50,
     marginStart: 20,
+    
   },
   text: {
     fontFamily: 'Poppins-Bold',
@@ -94,19 +100,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     justifyContent: 'center',
+    color: 'green'
   },
   innerText: {
     color: '#363e6b',
     fontFamily: 'Poppins-Regular',
+    color: 'white'
   },
   fieldContainer: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 30,
+    
     marginBottom: 30,
   },
   field: {
+    backgroundColor: 'white',
     width: 200,
     height: 50,
     borderColor: '#5c69ab',
@@ -119,10 +129,11 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   button: {
-    backgroundColor: 'darkblue',
+    backgroundColor: '#9cc2ff',
     height: 40,
     width: 100,
-    borderRadius: 30,
+    borderRadius: 15,
+    
   },
   buttonContainer: {
     justifyContent: 'center',
