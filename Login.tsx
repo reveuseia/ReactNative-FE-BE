@@ -39,7 +39,7 @@ const LoginScreen = () => {
             onChangeText={setUsername}
           />
           <TextInput
-            style={styles.field}
+            style={[styles.field, styles.fieldMargin]}
             placeholder="Enter your Password"
             value={password}
             onChangeText={setPassword}
@@ -114,6 +114,9 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     fontFamily: 'Poppins-Regular',
+  },
+  fieldMargin:{
+    marginTop: 15,
   },
   button: {
     backgroundColor: 'darkblue',
